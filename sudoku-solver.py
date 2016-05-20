@@ -1,58 +1,19 @@
+def check_single_zone(a, b, c, d, x): # a, b, c, and d represent the
+    zone = []
+    for row in board[a:b]:
+        for column in row[c:d]:
+            zone.append(column)
+    if zone.count(x) > 1:
+        return False
+
 def check_zones(x):
-    zone = []
-    for cell in board[0:3]:
-        for value in cell[0:3]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[0:3]:
-        for value in cell[3:6]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[0:3]:
-        for value in cell[6:9]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[3:6]:
-        for value in cell[0:3]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[3:6]:
-        for value in cell[3:6]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[3:6]:
-        for value in cell[6:9]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[6:9]:
-        for value in cell[0:3]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[6:9]:
-        for value in cell[3:6]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
-    zone = []
-    for cell in board[6:9]:
-        for value in cell[6:9]:
-            zone.append(value)
-    if zone.count(x) > 1:
-        return False
+    y = [0, 3, 6]
+    z = [3, 6, 9]
+    for i in range(3):
+        for j in range(3):
+            if check_single_zone(y[i], z[i], y[j], z[j], x) == False:
+                return False
+    return True
 
 def check_columns(x):
     for i in range(0,9):
