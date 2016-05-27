@@ -4,14 +4,6 @@ class Cell:
         self.isPermanent = False
 
 
-class Zones:
-    def __init__(self, rowStart, rowEnd, columnStart, columnEnd):
-        self.rowStart = rowStart
-        self.rowEnd = rowEnd
-        self.columnStart = columnStart
-        self.columnEnd = columnEnd
-
-
 def solve(board):  # solves the board
     row = 0  # begin in the first cell in the first row
     column = 0
@@ -37,24 +29,24 @@ def solve(board):  # solves the board
             continue  # restart
 
 
-def initializeBoard():
-    board = [[], [], [], [], [], [], [], [], []]
-    for row in board:
-        for i in range(0, 9):
-            row.append(Cell(0, False))
-    return board
-
-
 def add1(board, row, column):  # increments each cell
-    if board[row][column].value == 9:  # if the value of the cell is equal to 9,
-        board[row][column].value = 0  # set it equal to 0
-        if column == 0:  # if in the first cell of a row,
-            row -= 1  # go back a row, to the last cell
-            column = 8
-        else:  # if not in the first cell,
-            column -= 1  # go to the previous cell
-    board[row][column].value += 1  # add 1 to the current cell
-    return row, column  # return the new coordinate of the current cell
+    while True:
+        if board[row][column].isPermanent:
+            if column == 8:
+                row += 1
+                column = 0
+            else:
+                column += 1
+            continue
+        if board[row][column].value == 9:  # if the value of the cell is equal to 9,
+            board[row][column].value = 0  # set it equal to 0
+            if column == 0:  # if in the first cell of a row,
+                row -= 1  # go back a row, to the last cell
+                column = 8
+            else:  # if not in the first cell,
+                column -= 1  # go to the previous cell
+        board[row][column].value += 1  # add 1 to the current cell
+        return row, column  # return the new coordinate of the current cell
 
 
 def isValid(board):
@@ -113,9 +105,26 @@ def printBoard(board):
         print(line)
 
 
+def initializeBoard():
+    board = [[], [], [], [], [], [], [], [], []]
+    for row in board:
+        for i in range(0, 9):
+            row.append(Cell(0, False))
+    return board
+
 board = initializeBoard()
+
+# test values
+board[0][0].value = 9
+board[0][0].isPermanent = True
+
+board[8][8].value = 9
+board[8][8].isPermanent = True
+
+board[2][7].value = 9
+board[2][7].isPermanent = True
+
+board[4][1].value = 9
+board[4][1].isPermanent = True
+
 solve(board)
-
-
-# TO check the zones, we will check each of the 9 zones
-# TO check one of the 9 zones, we will check the values within its coordinates
