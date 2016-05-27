@@ -16,7 +16,7 @@ def solve(board):  # solves the board
     row = 0  # begin in the first cell in the first row
     column = 0
     while row != 9:  # while there are still empty spaces in the 9 rows,
-        row, column = add1(row, column)  # add 1 to the current cell
+        row, column = add1(board, row, column)  # add 1 to the current cell
         printBoard(board)
         print(), print()
         if isValid(board) is True:  # if the board is valid,
@@ -45,7 +45,7 @@ def initializeBoard():
     return board
 
 
-def add1(row, column):  # increments each cell
+def add1(board, row, column):  # increments each cell
     if board[row][column].value == 9:  # if the value of the cell is equal to 9,
         board[row][column].value = 0  # set it equal to 0
         if column == 0:  # if in the first cell of a row,
@@ -59,16 +59,16 @@ def add1(row, column):  # increments each cell
 
 def isValid(board):
     for i in range(1, 10):
-        if checkRowsForDuplicate(i) is False:
+        if checkRowsForDuplicate(board, i) is False:
             return False
-        if checkColumnsForDuplicate(i) is False:
+        if checkColumnsForDuplicate(board, i) is False:
             return False
-        if checkZonesForDuplicate(i) is False:
+        if checkZonesForDuplicate(board, i) is False:
             return False
     return True
 
 
-def checkRowsForDuplicate(x):
+def checkRowsForDuplicate(board, x):
     for row in board:
         line = []
         for cell in row:
@@ -77,7 +77,7 @@ def checkRowsForDuplicate(x):
             return False
 
 
-def checkColumnsForDuplicate(x):
+def checkColumnsForDuplicate(board, x):
     for i in range(0, 9):
         column = []
         for row in board:
@@ -86,17 +86,17 @@ def checkColumnsForDuplicate(x):
             return False
 
 
-def checkZonesForDuplicate(x):
+def checkZonesForDuplicate(board, x):
     y = [0, 3, 6]
     z = [3, 6, 9]
     for i in range(3):
         for j in range(3):
-            if checkSingleZone(x, y[i], z[i], y[j], z[j]) is False:
+            if checkSingleZone(board, x, y[i], z[i], y[j], z[j]) is False:
                 return False
     return True
 
 
-def checkSingleZone(x, rowStart, rowEnd, columnStart, columnEnd):
+def checkSingleZone(board, x, rowStart, rowEnd, columnStart, columnEnd):
     zoneValues = []
     for row in board[rowStart:rowEnd]:
         for column in row[columnStart:columnEnd]:
