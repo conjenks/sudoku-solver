@@ -8,17 +8,19 @@ def solve(board):  # solves the board
     row = 0  # begin in the first cell in the first row
     column = 0
     while row != 9:  # while there are still empty spaces in the 9 rows,
-        row, column = add1(board, row, column)  # add 1 to the current cell
+        if row <= 8 and column <= 8: # HOW DOES A LIST INDEX ERROR COME UP IN
+                                     # THE NEXT LINE IF I CHECK THESE VALUES HERE?
+            row, column = add1(board, row, column)  # add 1 to the current cell
         printBoard(board)
         print(), print()
-        if isValid(board) is True:  # if the board is valid,
+        if valid(board) is True:  # if the board is valid,
             if column == 8:  # if in the last cell of a row,
                 row += 1  # move up one row, and begin in the first cell
                 column = 0
             else:  # otherwise, move on to the next cell
                 column += 1
             continue  # restart
-        if not isValid(board):  # if the board is invalid,
+        if valid(board) is False:  # if the board is invalid,
             if board[row][column].value == 9:  # if the value of the current cell is equal to 9,
                 board[row][column].value = 0  # set it equal to 0
                 if column == 0:  # if in the first cell of a row,
@@ -30,7 +32,7 @@ def solve(board):  # solves the board
 
 
 def add1(board, row, column):  # increments each cell
-    while True:
+    while row != 9:
         if board[row][column].isPermanent:
             if column == 8:
                 row += 1
@@ -47,9 +49,10 @@ def add1(board, row, column):  # increments each cell
                 column -= 1  # go to the previous cell
         board[row][column].value += 1  # add 1 to the current cell
         return row, column  # return the new coordinate of the current cell
+    return row, column
 
 
-def isValid(board):
+def valid(board):
     for i in range(1, 10):
         if checkRowsForDuplicate(board, i) is False:
             return False
