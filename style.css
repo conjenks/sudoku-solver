@@ -1,0 +1,40 @@
+table {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+tbody {
+	border: solid medium;
+}
+
+td {
+	padding: 5px;
+	border: solid thin;
+	width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+}
+
+td:nth-of-type(3n) {
+    border-right: solid medium;
+}
+
+tr:nth-of-type(3n) {
+    border-bottom: solid medium;
+}
+
+input {
+	text-align: center;
+	border: none;
+	font-size: 30px;
+	outline: none;
+	font-weight: bold;
+	width: 100%;
+	background-color: white;
+}
+
+button {
+	display: inline-block;
+}
