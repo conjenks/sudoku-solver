@@ -22,7 +22,11 @@ def htmlTail():
 
 def callSolver(board):
     populate(board)
+    if valid(board) is False:
+        print("<p align=center>That board is unsolvable. Please enter appropriate values.</p>")
+        return False
     solve(board)
+    return True
 
 
 def populate(board):
@@ -43,7 +47,7 @@ def htmlBody(board):
         print("<tr>")
         for j in range(9):
             if board[i][j].isPermanent:
-                print("""<td align="center" bgcolor="red">%s</td>""" % board[i][j].value)
+                print("""<td align="center" bgcolor="aqua">%s</td>""" % board[i][j].value)
             else:
                 print("""<td align="center">%s</td>""" % board[i][j].value)
         print("</tr>")
@@ -53,8 +57,8 @@ if __name__ == "__main__":
     try:
         htmlTop()
         board = initializeBoard()
-        callSolver(board)
-        htmlBody(board)
+        if callSolver(board) is True:
+            htmlBody(board)
         htmlTail()
     except:
         cgi.print_exception()
