@@ -4,36 +4,29 @@ class Cell:
         self.isPermanent = False
 
 
-def solve(board):  # solves the board
-    if valid(board) is False:
-        print("This board is unsolvable.")
-        return
-    row = 0  # begin in the first cell in the first row
+def solve(board):
+    row = 0
     column = 0
-    while row != 9:  # while there are still empty spaces in the 9 rows,
-        if row <= 8 and column <= 8:
-            row, column = add1(board, row, column)  # add 1 to the current cell
-        if valid(board) is True and row != 9:  # if the board is valid,
+    while row != 9 and column !=9:  # while there are still empty spaces in the 9 rows,
+        row, column = add1(board, row, column)  # add 1 to the current cell
+        if valid(board) is True:
             row, column = moveUp(row, column)
-            continue  # restart
-        if valid(board) is False:  # if the board is invalid,
+        else:  # the board is invalid,
             if board[row][column].value == 9:  # if the value of the current cell is equal to 9,
                 board[row][column].value = 0  # set it equal to 0
                 row, column = moveBack(board, row, column)
-            continue  # restart
 
 
-def add1(board, row, column):  # increments each cell
-    while row <= 8 and column <= 8:
-        if board[row][column].isPermanent and row != 8 and column != 8:
-            row, column = moveUp(row, column)
-            continue
-        while board[row][column].value == 9 and board[row][column].isPermanent is False:  # if the value of the cell is equal to 9,
-            board[row][column].value = 0  # set it equal to 0
-            row, column = moveBack(board, row, column)
-        if board[row][column].isPermanent is False:
-            board[row][column].value += 1  # add 1 to the current cell
-        return row, column  # return the new coordinate of the current cell
+def add1(board, row, column):
+    if board[row][column].isPermanent and row != 8 and column != 8: # if it's permanent and we're not in the last cell
+        row, column = moveUp(row, column)
+        add1(board, row, column)
+    while board[row][column].value == 9 and board[row][column].isPermanent is False:  # if the value of the cell is equal to 9 and impermanent
+        board[row][column].value = 0
+        row, column = moveBack(board, row, column)
+    if board[row][column].isPermanent is False:
+        board[row][column].value += 1  # add 1 to the current cell
+    return row, column  # return the new coordinate of the current cell
 
 def moveUp(row, column):
     if column == 8:
@@ -101,6 +94,12 @@ def checkSingleZone(board, x, rowStart, rowEnd, columnStart, columnEnd):
     if zoneValues.count(x) > 1:
         return False
 
+def initializeBoard():
+    board = [[], [], [], [], [], [], [], [], []]
+    for row in board:
+        for i in range(0, 9):
+            row.append(Cell(0, False))
+    return board
 
 def printBoard(board):
     for row in board:
@@ -109,9 +108,3 @@ def printBoard(board):
             line.append(cell.value)
         print(line)
 
-def initializeBoard():
-    board = [[], [], [], [], [], [], [], [], []]
-    for row in board:
-        for i in range(0, 9):
-            row.append(Cell(0, False))
-    return board

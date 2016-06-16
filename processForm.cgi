@@ -4,9 +4,6 @@ import cgi
 import cgitb
 from sudokuSolver import *
 
-cgitb.enable()
-
-
 def htmlTop():
     print("""Content-type:text/html\n\n
         <!DOCTYPE html>
@@ -15,31 +12,6 @@ def htmlTop():
         <head><link href="style.css" rel="stylesheet" type="text/css"></head>
         <body>
         <h1 align=center>Sudoku Solver</h1>""")
-
-def htmlTail():
-    print("</body></html>")
-
-
-def callSolver(board):
-    populate(board)
-    if valid(board) is False:
-        print("<p align=center>That board is unsolvable. Please enter appropriate values.</p>")
-        return False
-    solve(board)
-    return True
-
-
-def populate(board):
-    formData = cgi.FieldStorage()
-    for i in range(9):
-        for j in range(9):
-            dataCoordinates = (i, j)
-            dataCoordinates = "%s%s" % dataCoordinates
-            if dataCoordinates in formData:
-                value = formData.getvalue(dataCoordinates)
-                board[i][j].value = int(value)
-                board[i][j].isPermanent = True
-
 
 def htmlBody(board):
     print("<table align=center>")
@@ -53,11 +25,30 @@ def htmlBody(board):
         print("</tr>")
     print("</table>")
 
+def htmlTail():
+    print("</body></html>")
+
+def populate(board):
+    formData = cgi.FieldStorage()
+    for i in range(9):
+        for j in range(9):
+            dataCoordinates = (i, j)
+            dataCoordinates = "%s%s" % dataCoordinates
+            if dataCoordinates in formData:
+                value = formData.getvalue(dataCoordinates)
+                board[i][j].value = int(value)
+                board[i][j].isPermanent = True
+
 if __name__ == "__main__":
+    cgitb.enable()
     try:
         htmlTop()
         board = initializeBoard()
-        if callSolver(board) is True:
+        populate(board)
+        if valid(board) is False:
+            print("<p align=center>That board is unsolvable. Please enter appropriate values.</p>")
+        else:
+            solve(board)
             htmlBody(board)
         htmlTail()
     except:

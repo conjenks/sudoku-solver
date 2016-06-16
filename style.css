@@ -1,6 +1,5 @@
 table {
     border-collapse: collapse;
-    font-family: sans-serif;
 }
 
 tbody {
@@ -12,8 +11,7 @@ td {
 	border: solid thin;
 	width: 40px;
     height: 40px;
-    display: inline-block;
-    text-align: center;
+	text-align: center;
     font-size: 30px;
 }
 
@@ -28,12 +26,8 @@ tr:nth-of-type(3n) {
 input {
 	text-align: center;
 	border: none;
-	font-size: 30px;
 	outline: none;
+	font-size: 30px;
 	width: 100%;
 	background-color: white;
-}
-
-button {
-	display: inline-block;
 }
