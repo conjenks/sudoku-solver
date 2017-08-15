@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-Solves 9x9 sudoku puzzles by using a brute force algorithm.
+Solves 9x9 Sudoku puzzles by using a brute force algorithm.
 
 ## QUICK USAGE GUIDE
 
