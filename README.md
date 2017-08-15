@@ -1,6 +1,6 @@
 # Sudoku Solver
 
-Solves 9x9 sudoku puzzles through a brute force algorithm.
+Solves 9x9 sudoku puzzles by using a brute force algorithm.
 
 ## QUICK USAGE GUIDE
 
@@ -9,7 +9,7 @@ Solves 9x9 sudoku puzzles through a brute force algorithm.
 3. Edit the first line in `processForm.cgi` so that it contains your local machine's Python path.
 4. Start the server and navigate to `localhost` in your browser!
 
-## SCREENSHOOTS
+## SCREENSHOTS
 
 ![alt text](screenshots/pre_solve.PNG?raw=true)
 
