@@ -11,6 +11,10 @@ Solves 9x9 sudoku puzzles by using a brute force algorithm.
 
 ## SCREENSHOTS
 
+### Pre-Solve
+
 ![alt text](screenshots/pre_solve.PNG?raw=true)
+
+### Post-Solve
 
 ![alt text](screenshots/post_solve.PNG?raw=true)
