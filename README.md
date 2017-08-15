@@ -1,3 +1,16 @@
-# sudoku-solver
+# Sudoku Solver
 
-Can be used by running a XAMPP local server and putting this repository in its 'htdocs' directory.
+Solves 9x9 sudoku puzzles through a brute force algorithm.
+
+## QUICK USAGE GUIDE
+
+1. Install [XAMPP](https://www.apachefriends.org/index.html)
+2. Place every file in this repository in the `/htdocs` directory within the XAMPP install.
+3. Edit the first line in `processForm.cgi` so that it contains your local machine's Python path.
+4. Start the server and navigate to `localhost` in your browser!
+
+## SCREENSHOOTS
+
+![alt text](screenshots/pre_solve.PNG?raw=true)
+
+![alt text](screenshots/post_solve.PNG?raw=true)
